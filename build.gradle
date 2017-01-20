@@ -13,7 +13,9 @@ repositories {
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'DailyText crawler',
-                'Implementation-Version': version
+                'Implementation-Version': version,
+                'Author': 'Rodney Kwabena Boachie',
+                'Email':'rbk.unlimited@gmail.com'
 
     }
     // baseName = project.name + '-all'
