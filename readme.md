@@ -1,0 +1,1 @@
+Java library to crawl jw.org and retrieve daily text in friendly format
