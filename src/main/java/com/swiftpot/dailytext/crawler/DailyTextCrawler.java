@@ -18,11 +18,12 @@ import java.util.Date;
 public class DailyTextCrawler {
 
     private static String JW_DAILY_TEXT_BASE_URL="http://wol.jw.org/en/wol/dt/r1/lp-e";
-    private static String DATE_PATTERN = "yyyy-MM-dd";
+    private static String DEFAULT_DATE_PATTERN = "yyyy/MM/dd";
+    private static String FRIENDLY_DATE_PATTERN = "EEEEE, MMMMM yyyy";
 
     /**
      *
-     * @param date pass in date in yyyy/mm/dd format as that is what is used on jw.org website.
+     * @param date pass in date in yyyy/MM/dd format as that is what is used on jw.org website.
      * @return
      * @throws IOException
      */
@@ -35,9 +36,10 @@ public class DailyTextCrawler {
         //Find the first div with the class 'bodyTxt' in the html page,this contains the body of the daily Text.
         Element dailyTextBodyDiv = doc.select("div.bodyTxt").first();
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DEFAULT_DATE_PATTERN);
         Date friendlyDate = simpleDateFormat.parse(date);
-        String friendlyDateString = simpleDateFormat.format(friendlyDate);
+        SimpleDateFormat friendlyDateFormat = new SimpleDateFormat(FRIENDLY_DATE_PATTERN);
+        String friendlyDateString = friendlyDateFormat.format(friendlyDate);
 
         return new DailyTextEntity(friendlyDateString,dailyTextThemeParagraph.text(),dailyTextBodyDiv.text());
 
